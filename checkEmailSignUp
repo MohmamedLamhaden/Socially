@@ -1,0 +1,52 @@
+import 'dart:convert';
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import '/flutter_flow/custom_functions.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
+import '/flutter_flow/uploaded_file.dart';
+import '/backend/supabase/supabase.dart';
+import '/auth/supabase_auth/auth_util.dart';
+
+String? checkEmailSignUp(
+  String? email,
+  String? password,
+  String? confirmPassword,
+) {
+  /// MODIFY CODE ONLY BELOW THIS LINE
+
+  // Check email
+  if (email == null || email.trim().isEmpty) {
+    return 'Please enter your email address.';
+  }
+  // Simple email validation
+  final emailRegex = RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$');
+  if (!emailRegex.hasMatch(email.trim())) {
+    return 'Please enter a valid email address.';
+  }
+
+  // Check password
+  if (password == null || password.isEmpty) {
+    return 'Please enter your password.';
+  }
+  if (password.length < 6) {
+    return 'Password must be at least 6 characters long.';
+  }
+
+  // Check confirm password
+  if (confirmPassword == null || confirmPassword.isEmpty) {
+    return 'Please confirm your password.';
+  }
+  if (password != confirmPassword) {
+    return 'Passwords do not match.';
+  }
+
+  // Everything is valid
+  return null;
+
+  /// MODIFY CODE ONLY ABOVE THIS LINE
+}
