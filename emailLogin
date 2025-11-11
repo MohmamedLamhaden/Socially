@@ -1,0 +1,48 @@
+// Automatic FlutterFlow imports
+import '/backend/supabase/supabase.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart'; // Imports other custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
+import 'package:flutter/material.dart';
+// Begin custom action code
+// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+Future<String?> emailLogin(String email, String password) async {
+  final supabase = Supabase.instance.client;
+
+  try {
+    // Custom validation before calling Supabase
+    if (email.trim().isEmpty) {
+      return 'Please enter your email.';
+    }
+
+    if (password.trim().isEmpty) {
+      return 'Please enter your password.';
+    }
+
+    final response = await supabase.auth.signInWithPassword(
+      email: email,
+      password: password,
+    );
+
+    if (response.user != null) {
+      // Login successful — return nothing
+      return null;
+    } else {
+      // Fallback in case Supabase returns null without throwing
+      return 'An unknown error occurred during login.';
+    }
+  } on AuthException catch (e) {
+    // Supabase handles normal login errors (invalid email/password, etc.)
+    return e.message;
+  } catch (e) {
+    // Catch any other runtime errors
+    return 'Unexpected error: $e';
+  }
+}
+
+// Set your action name, define your arguments and return parameter,
+// and then add the boilerplate code using the green button on the right!
