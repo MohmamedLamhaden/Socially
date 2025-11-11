@@ -1,0 +1,43 @@
+// Automatic FlutterFlow imports
+import '/backend/supabase/supabase.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart'; // Imports other custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
+import 'package:flutter/material.dart';
+// Begin custom action code
+// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+Future<String?> checkAuthFields(
+  String? email,
+  String? password,
+  String? confirmPassword,
+) async {
+  // Add your function code here!
+  if (email == null || email.trim().isEmpty) {
+    return 'Please enter your email.';
+  }
+
+  final emailRegex = RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$');
+  if (!emailRegex.hasMatch(email.trim())) {
+    return 'Please enter a valid email address.';
+  }
+
+  if (password == null || password.isEmpty) {
+    return 'Please enter a password.';
+  }
+
+  if (password.length < 6) {
+    return 'Password must be at least 6 characters long.';
+  }
+
+  if (confirmPassword == null || confirmPassword.isEmpty) {
+    return 'Please confirm your password.';
+  }
+
+  if (password != confirmPassword) {
+    return 'Passwords do not match.';
+  }
+
+  return null; // ✅ No error
+}
